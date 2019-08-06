@@ -5,14 +5,11 @@ import java.util.concurrent.CountDownLatch;
 public class Guide extends Thread {
     CountDownLatch countDownLatch;
 
-    public Guide(CountDownLatch countDownLatch) {
-        this.countDownLatch = countDownLatch;
-        start();
-    }
-
     @Override
             public void run(){
         try {
+            countDownLatch.await();
+            System.out.println("done");
             for(int i = 1 ; i <= 15 ; i++){
                 System.out.println(i);
             }
@@ -21,6 +18,6 @@ public class Guide extends Thread {
             e.printStackTrace();
         }
         System.out.println("Done Work");
-        countDownLatch.countDown();
+
     }
 }
